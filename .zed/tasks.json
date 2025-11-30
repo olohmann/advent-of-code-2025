@@ -1,0 +1,20 @@
+[
+  {
+    "label": "dotnet run",
+    "command": "dotnet",
+    "args": ["run", "--", "1"],
+    "tags": ["dotnet-run"]
+  },
+  {
+    "label": "dotnet build",
+    "command": "dotnet",
+    "args": ["build"],
+    "tags": ["dotnet-build"]
+  },
+  {
+    "label": "dotnet test",
+    "command": "dotnet",
+    "args": ["test"],
+    "tags": ["dotnet-test"]
+  }
+]
