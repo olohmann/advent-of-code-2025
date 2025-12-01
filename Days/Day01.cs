@@ -6,51 +6,71 @@ public class Day01 : SolverBase
         Right
     }
 
-    public int TurnTheDial(Direction direction, int currentPosition, int clicks)
+    // ... avoids the painful negative integer division that truncates to 0.
+    private int FloorDiv(int x, int n)
     {
-        int result;
+        return (x >= 0) ? (x / n) : ((x - n + 1) / n);
+    }
+
+    public (int, int) TurnTheDial(Direction direction, int currentPosition, int clicks)
+    {
+        int newPosition;
+        int zeroFlips;
         switch (direction)
         {
             case Direction.Left:
-                result = ((currentPosition - clicks) % 100 + 100) % 100;
-                Console.WriteLine($"L{clicks} - {result}");
+                newPosition = ((currentPosition - clicks) % 100 + 100) % 100;
+                zeroFlips = FloorDiv(currentPosition - 1, 100) - FloorDiv(currentPosition - clicks - 1, 100);
+                Console.WriteLine($"L{clicks} - {newPosition} (Flips: {zeroFlips})");
                 break;
             case Direction.Right:
-                result = (currentPosition + clicks) % 100;
-                Console.WriteLine($"R{clicks} - {result}");
+                newPosition = (currentPosition + clicks) % 100;
+                zeroFlips = (currentPosition + clicks) / 100 - currentPosition / 100;
+                Console.WriteLine($"R{clicks} - {newPosition} (Flips: {zeroFlips})");
                 break;
             default:
                 throw new ArgumentException("Invalid direction");
         }
 
-        return result;
+        return (newPosition, zeroFlips);
     }
 
     public override string Part1(string input)
     {
         var lines = Lines(input);
         int position = 50;
-        int zeroCount = 0;
+        int zeroFlips = 0;
 
         foreach (var line in lines)
         {
             var directionStr = line.Substring(0, 1);
             var direction = directionStr == "L" ? Direction.Left : Direction.Right;
             var clicks = int.Parse(line.Substring(1, line.Length - 1));
-            position = TurnTheDial(direction, position, clicks);
+            (position, _) = TurnTheDial(direction, position, clicks);
 
-            zeroCount = position == 0 ? zeroCount + 1 : zeroCount;
+            zeroFlips = position == 0 ? zeroFlips + 1 : zeroFlips;
         }
 
-        return zeroCount.ToString();
+        return zeroFlips.ToString();
     }
 
     public override string Part2(string input)
     {
         var lines = Lines(input);
+        int position = 50;
+        int zeroCount = 0;
+        int zeroFlips = 0;
 
-        // TODO: Implement part 2
+        foreach (var line in lines)
+        {
+            var directionStr = line.Substring(0, 1);
+            var direction = directionStr == "L" ? Direction.Left : Direction.Right;
+            var clicks = int.Parse(line.Substring(1, line.Length - 1));
+            (position, zeroFlips) = TurnTheDial(direction, position, clicks);
 
-        return "0";
+            zeroCount += zeroFlips;
+        }
+
+        return zeroCount.ToString();
     }
 }
