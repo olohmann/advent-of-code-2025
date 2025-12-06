@@ -8,7 +8,31 @@ public static class Utils
     
     public static readonly (int dx, int dy)[] Directions8 = 
         [(0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1)];
-    
+
+    public static T[][] CloneGrid<T>(T[][] original) where T : struct
+    {
+        var newGrid = new T[original.Length][];
+        for (int i = 0; i < original.Length; i++)
+        {
+            newGrid[i] = (T[])original[i].Clone();
+        }
+        return newGrid;
+    }
+
+    public static bool GridsEqual<T>(T[][] gridA, T[][] gridB) where T : struct
+    {
+        if (gridA.Length != gridB.Length) return false;
+
+        for (int i = 0; i < gridA.Length; i++)
+        {
+            if (!gridA[i].SequenceEqual(gridB[i]))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static bool InBounds<T>(this T[][] grid, int x, int y) =>
         y >= 0 && y < grid.Length && x >= 0 && x < grid[y].Length;
     
