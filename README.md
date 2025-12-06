@@ -5,11 +5,10 @@
 ## Progress ⭐☆
 
 - 🎄 Day 01 ⭐⭐
-  - Learned about C#'s specific behavior in integer division with negative numbers and how it differs from other languages.
-  - ... after figuring out this "1-off" issue, the rest was OK 
-- 🎄 Day 02 ☆☆
-- 🎄 Day 04 ☆☆
-- 🎄 Day 05 ☆☆
+- 🎄 Day 02 ⭐⭐
+- 🎄 Day 03 ⭐⭐
+- 🎄 Day 04 ⭐⭐
+- 🎄 Day 05 ⭐⭐
 - 🎄 Day 06 ☆☆
 - 🎄 Day 07 ☆☆
 - 🎄 Day 08 ☆☆
