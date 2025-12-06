@@ -1,5 +1,7 @@
 // Additional utility methods you can extend
 
+using System.Text;
+
 public static class Utils
 {
     // Direction helpers for grid navigation
@@ -18,6 +20,18 @@ public static class Utils
         }
         return newGrid;
     }
+
+    public static T[] CloneArr<T>(T[] original) where T : struct
+    {
+        var newArr = new T[original.Length];
+        for (int i = 0; i < original.Length; i++)
+        {
+            newArr[i] = original[i];
+        }
+
+        return newArr;
+    }
+
 
     public static bool GridsEqual<T>(T[][] gridA, T[][] gridB) where T : struct
     {
@@ -64,6 +78,27 @@ public static class Utils
         Console.WriteLine();
     }
     
+    public static void PrintSequence<T>(IEnumerable<T> sequence, string title = "")
+    {
+        var strBuilder = new StringBuilder();
+        for(var i = 0; i < sequence.Count() - 1; i++)
+        {
+            strBuilder.Append(sequence.ElementAt(i));
+            strBuilder.Append("; ");
+        }
+
+        if (sequence.Count() > 0)
+        {
+            strBuilder.Append(sequence.ElementAt(sequence.Count() - 1));
+        }
+
+        Console.WriteLine("----");
+        if (!string.IsNullOrWhiteSpace(title))
+        {
+            Console.WriteLine(title);
+        }
+        Console.WriteLine(strBuilder);
+    }
     // Transpose grid
     public static T[][] Transpose<T>(T[][] grid)
     {

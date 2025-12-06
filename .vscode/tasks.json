@@ -4,12 +4,24 @@
 		{
 			"label": "run",
 			"type": "shell",
-			"command": "dotnet run",
+			"command": "dotnet run -- 5",
 			"isBackground": false,
 			"problemMatcher": [
 				"$msCompile"
 			],
 			"group": "test"
+		},
+		{
+			"label": "build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/AoC.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
 		}
 	]
 }
